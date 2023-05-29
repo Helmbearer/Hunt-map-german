@@ -1,86 +1,84 @@
 # Dev
 
-## Установка зависимости
+## Dependency Installation
 
-В разработке используется версия LTS Node.js 16.13.2 .
-Посмотреть версию установленной node можно с помощью команды:
+Development requires LTS version Node.js 16.13.2.
+You can check the installed version of Node.js by using the command:
 
 > node -v
 
-Если у вас установленна другая версия node.js, удалите текущую версию с компьютера. Установите node c помощью nvm.
-[Инструкция установки nvm для разных ОС](https://github.com/nvm-sh/nvm#node-version-manager---)
+If you have a different version of Node.js installed, please remove the current version from your computer. Install Node.js using nvm.
+[Installation instructions for nvm on different operating systems](https://github.com/nvm-sh/nvm#node-version-manager---)
 
-Актуальная версия node указана в этом файле.
+The current version of Node.js is specified in this file.
 
-Установка зависимости проекта командой:
+Install project dependencies with the following command:
 
 > npm ci
 
-## Обновление версии node.js
+## Updating Node.js Version
 
-0. В командной строке, где вы работаете с nvm ввести команду `nvm list available`. В столбце LTS выбрать самую последнюю версию.
-1. Установить последнюю версию командой `nvm install [номер нужной версии]`.
-2. Проверить наличие версии командой `nvm ls`.
-3. Выбрать необходимую версию командой `nvm use [номер нужной версии]`. При повтоном вводе команды `nvm ls` возле нужной версии будет `*`
-4. Обновить номер актуальной версии в этом файле и выполнить шаги из раздела Dev.
+0. In the command line where you are using nvm, enter the command `nvm list available`. In the LTS column, select the latest version.
+1. Install the latest version using the command `nvm install [desired version number]`.
+2. Check the installed version using the command `nvm ls`.
+3. Select the desired version using the command `nvm use [desired version number]`. The chosen version will have `*` next to it when you run the command `nvm ls`.
+4. Update the version number in this file and follow the steps in the Dev section.
 
-## Новый язык
+## New Language
 
 0. `public/locales/`
-1. создать папку с кодом языка
+1. Create a folder with the language code.
 2. `public/locales/{code_lang}`
-3. создать файл `translation.json`
-4. добавить контент из англ. яз, как эталон формата
-5. перевести на нужный язык
+3. Create a file named `translation.json`.
+4. Add the content from the English language file as the format reference.
+5. Translate the content to the desired language.
 6. `store/lang/state`
-7. добавить язык
+7. Add the new language.
 
-## Новый маркер
+## New Marker
 
 0. `store/filter/state` (`types`, `extraTypes`, `polygonTypes`, `polylineTypes`)
-1. добавить типы
+1. Add the marker types.
 2. `containers/map/`
-3. добавить компонент маркера
+3. Add the marker component.
 4. `containers/map/switchTypeFeature`
-5. добавить тип маркера = компонент
-6. добавить перевод
+5. Add the marker type and component.
+6. Add the translation.
 
-## Новая карта
+## New Map
 
-0. в админке создать 2 коллекции (с сокращением именем карты (id))
+0. In the admin panel, create 2 collections (with a map name abbreviation (ID)).
 1. `public/images/tiles/`
-2. положить оригинал
+2. Place the original map image.
 3. `public/images/tiles/`
-4. создать папку с сокращением именем карты (id)
-5. нарезать карту [oliverheilig/LeafletPano](https://github.com/oliverheilig/LeafletPano)
+4. Create a folder with the map name abbreviation (ID).
+5. Slice the map using [oliverheilig/LeafletPano](https://github.com/oliverheilig/LeafletPano).
 6. `public/images/tiles{id_map}`
-7. сохранить тайлы
+7. Save the tiles.
 8. `store/map/state`
-9. добавить конфигурацию
-10. добавить перевод
+9. Add the configuration.
+10. Add the translation.
 11. data/index
-12. добавить в мерж кэша
-13. добавить в крон по обновлению кэша
+12. Add to the cache merge.
+13. Add to the cache update cron.
 
-_Пример конфигурации карты_
+_Example map configuration_
 
 ```js
-    SB: {                                         // id map
-      id: 'SB',                                   // id map
+    SB: {                                         // map ID
+      id: 'SB',                                   // map ID
       image: {                                    //
-        width: 4096,                              // исходный размер картинки
-        height: 4096,                             // исходный размер картинки
-        path: '/images/tiles/SB/{z}-{x}-{y}.jpg', // путь до нарезанных тайлов
+        width: 4096,                              // original image size
+        height: 4096,                             // original image size
+        path: '/images/tiles/SB/{z}-{x}-{y}.jpg', // path to sliced tiles
       },                                          //
       levels: {                                   //
-        org: 4,                                   // оригинальный зум (размер на зум в тайлах) взяьб из pano
-        max: 7,                                   // максимальная нарезка, зум 7
-        min: 1,                                   // минимальная нарезка, зум 1 (уменьшение исходника)
-        default: 1,                               // начальный зум
+        org: 4,                                   // original zoom (tile size per zoom) taken from pano
+        max: 7,                                   // maximum slicing, zoom 7
+        min: 1,                                   // minimum slicing, zoom 1 (reduction of the original image)
+        default: 1,                               // default zoom
       },                                          //
-      width: 1000,                                // игровой размер (в метрах)
-      height: 1000,                               // игровой размер (в метрах)
-      center: [-500, 500],                        // цента карты для позиционирования
-      padding: 300,                               // отступ для скролла
-    },
-```
+      width: 1000,                                // game size (in meters)
+      height: 1000,                               // game size (in meters)
+      center: [-500, 500],                        // map center for positioning
+      padding:
