@@ -1,3 +1,7 @@
+This is a Fork of the hunt-map Project to make a german and english version of it as a just for fun project.
+
+
+
 ![LOGO](public/images/media/logo-dark-text-870x390.png)
 
 ## Authors
